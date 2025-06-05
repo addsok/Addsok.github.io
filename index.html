@@ -46,18 +46,36 @@
       padding: 100px 20px;
       text-align: center;
       color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    header * {
+      position: relative;
+      z-index: 2;
     }
 
     header h1 {
       font-size: 3rem;
       margin: 0;
-      text-shadow: 0 0 10px #000;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     }
 
     header p {
       font-size: 1.2rem;
       margin-top: 10px;
-      text-shadow: 0 0 6px #000;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
     }
 
     header img {
@@ -183,11 +201,11 @@
   <!-- ABOUT SECTION -->
   <section id="about" class="about">
     <h2>About Us</h2>
-    <p>.Grim’s Trims is a local grounds maintenance business based in South Yorkshire, working across Sheffield, Rotherham and the surrounding areas. We’re here to help keep your garden or outdoor space tidy all year round – whether it’s grass cutting, hedge trimming, garden clearance, tree work, or green waste removal.
+    <p>Grim’s Trims is a local grounds maintenance business based in South Yorkshire, working across Sheffield, Rotherham and the surrounding areas. We’re here to help keep your garden or outdoor space tidy all year round – whether it’s grass cutting, hedge trimming, garden clearance, tree work, or green waste removal.
 
 We offer one-off jobs or regular fortnightly/monthly visits, depending on what you need. No nonsense, no messing about – just reliable, honest work from a local team that takes pride in what we do.
 
-If your garden needs sorting, give Grim’s Trims a shout – we’ll get it looking right in no time.  </p>
+If your garden needs sorting, give Grim’s Trims a shout – we’ll get it looking right in no time.</p>
   </section>
 
   <!-- SERVICES SECTION -->
@@ -203,40 +221,9 @@ If your garden needs sorting, give Grim’s Trims a shout – we’ll get it loo
     </div>
     <div class="service-box">
       <h3>Garden Clearance</h3>
-      <p>We take care of overgrowth, weeds, and green waste removal.</p>
+      <p>Overgrown, messy or just in need of a tidy — we’ve got it covered.</p>
     </div>
   </section>
 
-  <!-- GALLERY SECTION -->
-  <section id="gallery" class="gallery">
-    <h2>Before & After</h2>
-    <img src="https://via.placeholder.com/300x200?text=Before+1" alt="Before job">
-    <img src="https://via.placeholder.com/300x200?text=After+1" alt="After job">
-    <img src="https://via.placeholder.com/300x200?text=Before+2" alt="Before job">
-    <img src="https://via.placeholder.com/300x200?text=After+2" alt="After job">
-  </section>
-
-  <!-- REVIEWS SECTION -->
-  <section id="reviews">
-    <h2>What People Say</h2>
-    <div class="reviews">
-      “Top lads. Turned up on time, got the job done quick, and garden looks mint. Highly recommend.” – Jade from Wath
-    </div>
-    <div class="reviews">
-      “Used Grim’s Trims for a full clearance. Couldn’t believe the difference. 5 stars.” – Dan from Thurnscoe
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <p><strong>Call or WhatsApp:</strong> <a href="tel:07912345678">07912 345 678</a></p>
-    <p><strong>Email:</strong> info@grimstrims.co.uk</p>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    &copy; 2025 Grim's Trims. Page By AddsDesigns.
-  </footer>
 </body>
 </html>
