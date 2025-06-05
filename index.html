@@ -1,82 +1,212 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grim's Trims</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        header {
-            background: #0a563d;
-            color: white;
-            text-align: center;
-            padding: 20px 10px;
-        }
-        header img {
-            width: 120px;
-            margin-bottom: 10px;
-        }
-        section {
-            padding: 20px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
-        }
-        .contact {
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grim's Trims | Garden Services</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    nav {
+      background: #2e7d32;
+      padding: 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      margin: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    header {
+      background: url('https://via.placeholder.com/1200x400?text=Grim%27s+Trims+Header') no-repeat center center/cover;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    .btn {
+      background: #2e7d32;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .about p, .contact p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .service-box {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 280px;
+      text-align: center;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .gallery img {
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    .reviews {
+      background: #e0f2f1;
+      border-left: 5px solid #2e7d32;
+      padding: 15px;
+      margin: 10px auto;
+      width: 80%;
+    }
+
+    footer {
+      background: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .gallery img {
+        width: 100%;
+      }
+
+      .service-box {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="logo.png" alt="Grim's Trims Logo">
-        <h1>Grim's Trims</h1>
-        <p>Garden Maintenance - Sheffield & Rotherham</p>
-    </header>
-    <section>
-        <h2>What We Do</h2>
-        <ul>
-            <li>🌳 Hedge cuts</li>
-            <li>🌱 De-weeding</li>
-            <li>🌲 Tree work</li>
-            <li>🎨 Garden painting</li>
-            <li>🪵 Fencing fitted or fixed</li>
-            <li>💧 Gutter cleaning</li>
-            <li>💦 Jet washing</li>
-            <li>🚛 Green waste removal</li>
-            <li>🧪 Weed control</li>
-            <li>🌷 Flower planting</li>
-            <li>🍁 Leaf collection</li>
-            <li>🛠️ Shed removals</li>
-        </ul>
-        <p>Any garden work – even if it's just a hand doing something – drop us a message!</p>
-        <div class="contact">
-            <h3>Contact Us</h3>
-            <p>📞 Brandon: <a href="tel:07425442944">07425 442944</a></p>
-            <p>📧 Email: <a href="mailto:Grimstrims@enquiries.com">Grimstrims@enquiries.com</a></p>
-            <p>💬 WhatsApp: <a href="https://wa.me/447425442944">Chat Now</a></p>
-            <p>👍 Find us on Facebook: <a href="https://www.facebook.com/share/1Adv12Mspy/?mibextid=wwXIfr">@grimtrims</a></p>
-        </div>
-        <p>✅ Always on time, reliable service, trustworthy and affordable prices.</p>
-        <p>✔ Fully insured and on Checkatrade<br>
-        🌟 5-star reviews with pictures available</p>
-    </section>
-    <footer>
-        &copy; 2025 Grim's Trims | Sheffield & Rotherham
-    </footer>
+
+  <!-- NAVIGATION BAR -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- HEADER SECTION -->
+  <header>
+    <h1>Grim's Trims</h1>
+    <p>Grass Cutting, Hedge Trimming & Garden Clearance in South Yorkshire</p>
+    <a href="tel:07912345678" class="btn">Call for a Free Quote</a>
+  </header>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>We’re a friendly two-man team offering reliable and affordable garden maintenance in Sheffield, Rotherham and nearby areas. Whether it’s a quick tidy-up or regular grass cutting, we’ll get the job done right.</p>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-box">
+      <h3>Grass Cutting</h3>
+      <p>One-off or regular mowing, big or small lawns welcome.</p>
+    </div>
+    <div class="service-box">
+      <h3>Hedge Trimming</h3>
+      <p>Neat and level hedges, safely trimmed to your liking.</p>
+    </div>
+    <div class="service-box">
+      <h3>Garden Clearance</h3>
+      <p>We take care of overgrowth, weeds, and green waste removal.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section id="gallery" class="gallery">
+    <h2>Before & After</h2>
+    <img src="https://via.placeholder.com/300x200?text=Before+1" alt="Before job">
+    <img src="https://via.placeholder.com/300x200?text=After+1" alt="After job">
+    <img src="https://via.placeholder.com/300x200?text=Before+2" alt="Before job">
+    <img src="https://via.placeholder.com/300x200?text=After+2" alt="After job">
+  </section>
+
+  <!-- REVIEWS SECTION -->
+  <section id="reviews">
+    <h2>What People Say</h2>
+    <div class="reviews">
+      “Top lads. Turned up on time, got the job done quick, and garden looks mint. Highly recommend.” – Jade from Wath
+    </div>
+    <div class="reviews">
+      “Used Grim’s Trims for a full clearance. Couldn’t believe the difference. 5 stars.” – Dan from Thurnscoe
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Call or WhatsApp:</strong> <a href="tel:07912345678">07912 345 678</a></p>
+    <p><strong>Email:</strong> grims.trims@email.com</p>
+    <p>We cover Sheffield, Rotherham, Thurnscoe, Wath & nearby areas.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Grim's Trims | Designed by Adds Designs
+  </footer>
+
 </body>
 </html>
