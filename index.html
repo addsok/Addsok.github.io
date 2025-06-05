@@ -92,46 +92,46 @@
       margin-bottom: 30px;
     }
 
-    .about p {
+    .about p, .contact p {
       font-size: 1.1rem;
       line-height: 1.6;
       text-align: center;
     }
 
-    .service-box-fade {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-      margin: auto;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeInUp 1s ease forwards;
-      animation-delay: 0.3s;
-    }
-
-    .service-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 1.2rem;
-      color: #2e7d32;
-    }
-
-    .service-list li {
-      margin-bottom: 12px;
+    .services {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      line-height: 1.6;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
     }
 
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .service-box {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 280px;
+      text-align: center;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .gallery img {
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    .reviews {
+      background: #e0f2f1;
+      border-left: 5px solid #2e7d32;
+      padding: 15px;
+      margin: 10px auto;
+      width: 80%;
     }
 
     footer {
@@ -150,19 +150,29 @@
       header h1 {
         font-size: 2rem;
       }
+
+      .gallery img {
+        width: 100%;
+      }
+
+      .service-box {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
+  <!-- NAVIGATION BAR -->
   <nav>
     <a href="#about">About</a>
     <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- HEADER -->
+  <!-- HEADER SECTION -->
   <header>
     <img src="https://i.ibb.co/cSncQvTP/Untitled.png" alt="Grim's Trims Logo">
     <h1>Grim's Trims</h1>
@@ -170,50 +180,63 @@
     <a href="tel:07912345678" class="btn">Call for a Free Quote</a>
   </header>
 
-  <!-- ABOUT -->
+  <!-- ABOUT SECTION -->
   <section id="about" class="about">
     <h2>About Us</h2>
-    <p>
-      Grim’s Trims is a local grounds maintenance business based in South Yorkshire, working across Sheffield, Rotherham and the surrounding areas.  
-      We’re here to help keep your garden or outdoor space tidy all year round – whether it’s grass cutting, hedge trimming, garden clearance, tree work, or green waste removal.
-      <br><br>
-      We offer one-off jobs or regular fortnightly/monthly visits. No nonsense, no messing about – just honest work from a local team who take pride in what we do.
-    </p>
+    <p>.Grim’s Trims is a local grounds maintenance business based in South Yorkshire, working across Sheffield, Rotherham and the surrounding areas. We’re here to help keep your garden or outdoor space tidy all year round – whether it’s grass cutting, hedge trimming, garden clearance, tree work, or green waste removal.
+
+We offer one-off jobs or regular fortnightly/monthly visits, depending on what you need. No nonsense, no messing about – just reliable, honest work from a local team that takes pride in what we do.
+
+If your garden needs sorting, give Grim’s Trims a shout – we’ll get it looking right in no time.  </p>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <h2>What We Do</h2>
-    <div class="service-box-fade">
-      <ul class="service-list">
-        <li>🌳 Hedge Cutting and Shaping</li>
-        <li>🌱 Weed Removal and Treatment</li>
-        <li>🌲 Tree Work: Pruning & Removal</li>
-        <li>🎨 Garden Painting & Décor</li>
-        <li>🪵 Fence Fitting or Repair</li>
-        <li>💦 Jet Washing for Patios & Paths</li>
-        <li>💧 Gutter Clearing</li>
-        <li>🚛 Green Waste Removal</li>
-        <li>🧪 Weed Spraying</li>
-        <li>🌷 Flower & Planting Services</li>
-        <li>🍁 Leaf Collection</li>
-        <li>🛠️ Shed Removals & Tools Supplied</li>
-        <li>🧤 Help With Any Garden Task – Big or Small</li>
-      </ul>
+  <!-- SERVICES SECTION -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-box">
+      <h3>Grass Cutting</h3>
+      <p>One-off or regular mowing, big or small lawns welcome.</p>
+    </div>
+    <div class="service-box">
+      <h3>Hedge Trimming</h3>
+      <p>Neat and level hedges, safely trimmed to your liking.</p>
+    </div>
+    <div class="service-box">
+      <h3>Garden Clearance</h3>
+      <p>We take care of overgrowth, weeds, and green waste removal.</p>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Get in Touch</h2>
-    <p style="text-align:center;">📞 Call or message us today to get your garden sorted.<br><br>
-    <a class="btn" href="tel:07912345678">Call Now</a>
+  <!-- GALLERY SECTION -->
+  <section id="gallery" class="gallery">
+    <h2>Before & After</h2>
+    <img src="https://via.placeholder.com/300x200?text=Before+1" alt="Before job">
+    <img src="https://via.placeholder.com/300x200?text=After+1" alt="After job">
+    <img src="https://via.placeholder.com/300x200?text=Before+2" alt="Before job">
+    <img src="https://via.placeholder.com/300x200?text=After+2" alt="After job">
+  </section>
+
+  <!-- REVIEWS SECTION -->
+  <section id="reviews">
+    <h2>What People Say</h2>
+    <div class="reviews">
+      “Top lads. Turned up on time, got the job done quick, and garden looks mint. Highly recommend.” – Jade from Wath
+    </div>
+    <div class="reviews">
+      “Used Grim’s Trims for a full clearance. Couldn’t believe the difference. 5 stars.” – Dan from Thurnscoe
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Call or WhatsApp:</strong> <a href="tel:07912345678">07912 345 678</a></p>
+    <p><strong>Email:</strong> info@grimstrims.co.uk</p>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Grim's Trims. All rights reserved.</p>
+    &copy; 2025 Grim's Trims. Page By AddsDesigns.
   </footer>
-
 </body>
 </html>
