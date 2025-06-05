@@ -33,20 +33,18 @@
     }
 
     header {
+      position: relative;
       background: url('https://i.ibb.co/0bg03n9/Untitled.png') no-repeat center center/cover;
       padding: 100px 20px;
-      text-align: center;
       color: white;
+      text-align: center;
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
+    header .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px 20px;
+      border-radius: 10px;
+      display: inline-block;
     }
 
     .btn {
@@ -147,11 +145,13 @@
 
   <!-- HEADER SECTION -->
   <header>
-  <img src="https://i.ibb.co/cSncQvTP/Untitled.png" alt="Grim's Trims Logo" style="max-width: 150px; margin-bottom: 20px;">
-  <h1>Grim's Trims</h1>
-  <p>Grass Cutting, Hedge Trimming & Garden Clearance in South Yorkshire</p>
-  <a href="tel:07912345678" class="btn">Call for a Free Quote</a>
-</header>
+    <div class="overlay">
+      <img src="https://i.ibb.co/cSncQvTP/Untitled.png" alt="Grim's Trims Logo" style="max-width: 150px; margin-bottom: 20px;">
+      <h1>Grim's Trims</h1>
+      <p>Grass Cutting, Hedge Trimming & Garden Clearance in South Yorkshire</p>
+      <a href="tel:07912345678" class="btn">Call for a Free Quote</a>
+    </div>
+  </header>
 
   <!-- ABOUT SECTION -->
   <section id="about" class="about">
@@ -200,13 +200,12 @@
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <p><strong>Call or WhatsApp:</strong> <a href="tel:07912345678">07912 345 678</a></p>
-    <p><strong>Email:</strong> grims.trims@email.com</p>
-    <p>We cover Sheffield, Rotherham, Thurnscoe, Wath & nearby areas.</p>
+    <p><strong>Email:</strong> info@grimstrims.co.uk</p>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    &copy; 2025 Grim's Trims | Designed by Adds Designs
+    <p>&copy; 2025 Grim's Trims. All rights reserved.</p>
   </footer>
 
 </body>
