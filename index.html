@@ -17,34 +17,52 @@
     }
 
     nav {
-      background: #2e7d32;
-      padding: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 12px 20px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(6px);
     }
 
     nav a {
       color: white;
-      margin: 10px;
+      margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 8px rgba(255,255,255,0.2);
+    }
+
+    nav a:hover {
+      color: #a5d6a7;
     }
 
     header {
-      position: relative;
       background: url('https://i.ibb.co/0bg03n9/Untitled.png') no-repeat center center/cover;
       padding: 100px 20px;
-      color: white;
       text-align: center;
+      color: white;
     }
 
-    header .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 40px 20px;
-      border-radius: 10px;
-      display: inline-block;
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      text-shadow: 0 0 10px #000;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      text-shadow: 0 0 6px #000;
+    }
+
+    header img {
+      max-width: 150px;
+      margin-bottom: 20px;
     }
 
     .btn {
@@ -55,6 +73,12 @@
       border-radius: 5px;
       margin-top: 20px;
       display: inline-block;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #1b5e20;
     }
 
     section {
@@ -118,6 +142,11 @@
     }
 
     @media (max-width: 600px) {
+      nav a {
+        display: inline-block;
+        margin: 8px 5px;
+      }
+
       header h1 {
         font-size: 2rem;
       }
@@ -145,12 +174,10 @@
 
   <!-- HEADER SECTION -->
   <header>
-    <div class="overlay">
-      <img src="https://i.ibb.co/cSncQvTP/Untitled.png" alt="Grim's Trims Logo" style="max-width: 150px; margin-bottom: 20px;">
-      <h1>Grim's Trims</h1>
-      <p>Grass Cutting, Hedge Trimming & Garden Clearance in South Yorkshire</p>
-      <a href="tel:07912345678" class="btn">Call for a Free Quote</a>
-    </div>
+    <img src="https://i.ibb.co/cSncQvTP/Untitled.png" alt="Grim's Trims Logo">
+    <h1>Grim's Trims</h1>
+    <p>Grass Cutting, Hedge Trimming & Garden Clearance in South Yorkshire</p>
+    <a href="tel:07912345678" class="btn">Call for a Free Quote</a>
   </header>
 
   <!-- ABOUT SECTION -->
@@ -205,8 +232,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Grim's Trims. All rights reserved.</p>
+    &copy; 2025 Grim's Trims. All rights reserved.
   </footer>
-
 </body>
 </html>
