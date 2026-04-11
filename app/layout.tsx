@@ -15,18 +15,22 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body>
-        <header className="sticky top-0 z-50 border-b border-cyan-500/20 bg-bg/95 backdrop-blur">
-          <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-            <Link href="/" className="font-black tracking-wider text-accent">BO7 CAMO TRACKER</Link>
-            <div className="flex items-center gap-3 text-sm">
-              <Link href="/dashboard">Dashboard</Link>
-              <Link href="/weapons">Weapons</Link>
-              <Link href="/leaderboard">Leaderboard</Link>
-              {user ? <Link href="/profile">Profile</Link> : <Link href="/login">Login</Link>}
+        <header className="sticky top-0 z-50 border-b border-white/10 bg-bg/90 backdrop-blur-xl">
+          <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3.5 sm:px-6">
+            <Link href="/" className="text-sm font-black uppercase tracking-[0.22em] text-accent sm:text-base">BO7 CAMO TRACKER</Link>
+            <div className="flex flex-wrap items-center gap-1.5 text-sm text-slate-200 sm:gap-2">
+              <Link className="rounded-lg px-2.5 py-1.5 hover:bg-white/5" href="/dashboard">Dashboard</Link>
+              <Link className="rounded-lg px-2.5 py-1.5 hover:bg-white/5" href="/weapons">Weapons</Link>
+              <Link className="rounded-lg px-2.5 py-1.5 hover:bg-white/5" href="/leaderboard">Leaderboard</Link>
+              {user ? (
+                <Link className="rounded-lg px-2.5 py-1.5 hover:bg-white/5" href="/profile">Profile</Link>
+              ) : (
+                <Link className="rounded-lg px-2.5 py-1.5 hover:bg-white/5" href="/login">Login</Link>
+              )}
             </div>
           </nav>
         </header>
-        <main className="mx-auto min-h-[calc(100vh-70px)] max-w-7xl px-4 py-6">{children}</main>
+        <main className="mx-auto min-h-[calc(100vh-76px)] max-w-7xl px-4 py-6 sm:px-6 sm:py-8">{children}</main>
         <AppToaster />
       </body>
     </html>
