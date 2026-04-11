@@ -10,18 +10,32 @@ export async function middleware(request: NextRequest) {
     {
       cookies: {
         getAll: () => request.cookies.getAll(),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
+        setAll: (
+          cookiesToSet: Array<{
+            name: string;
+            value: string;
+            options?: Parameters<typeof response.cookies.set>[2];
+          }>
+        ) => {
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
           response = NextResponse.next({ request });
-          cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
-        }
-      }
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options)
+          );
+        },
+      },
     }
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   const protectedRoutes = ["/dashboard", "/profile", "/weapons", "/categories", "/leaderboard", "/admin"];
-  const isProtected = protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route));
+  const isProtected = protectedRoutes.some((route) =>
+    request.nextUrl.pathname.startsWith(route)
+  );
+
   if (!user && isProtected) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
@@ -31,4 +45,6 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
-export const config = { matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"] };
+export const config = {
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+};
