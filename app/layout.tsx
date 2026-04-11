@@ -1,13 +1,13 @@
 import "@/styles/globals.css";
+import Image from "next/image";
 import Link from "next/link";
-import { Swords } from "lucide-react";
 import { AppToaster } from "@/components/ui/toaster";
 import { createClient } from "@/lib/supabase/server";
 import { BottomNav } from "@/components/layout/bottom-nav";
 
 export const metadata = {
-  title: "BO7 Camo Tracker",
-  description: "Track Black Ops 7 camo progress with live leaderboard rankings"
+  title: "Codhub | BO7 Tracker",
+  description: "Track Black Ops 7 camo progress with Codhub's BO7 Tracker"
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -22,11 +22,22 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <div className="app-shell">
           <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0d0b08]/90 backdrop-blur-2xl">
             <div className="mx-auto flex w-full max-w-xl items-center justify-between gap-3 px-4 py-4 sm:max-w-5xl sm:px-6">
-              <Link href="/" className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-[#1e1914] px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-accent/20 text-accent">
-                  <Swords className="h-3.5 w-3.5" />
-                </span>
-                BO7 Ops Hub
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2.5 rounded-2xl border border-white/15 bg-[#1e1914] px-3 py-2"
+              >
+                <Image
+                  src="/codhub-logo.png"
+                  alt="Codhub logo"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6 rounded-md object-contain"
+                  priority
+                />
+                <div className="leading-tight">
+                  <p className="text-sm font-semibold text-white">Codhub</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">BO7 Tracker</p>
+                </div>
               </Link>
               <p className="text-right text-[11px] uppercase tracking-[0.16em] text-slate-400 sm:text-xs">
                 Premium Companion Dashboard
