@@ -20,17 +20,20 @@ export async function signupAction(input: FormData) {
   });
 
   const supabase = await createClient();
-  const { data, error } = await supabase.auth.signUp({ email: payload.email, password: payload.password });
+
+  const { error } = await supabase.auth.signUp({
+    email: payload.email,
+    password: payload.password,
+    options: {
+      data: {
+        username: payload.username,
+        platform: payload.platform
+      }
+    }
+  });
+
   if (error) return { error: error.message };
 
-  if (data.user && payload.username && payload.platform) {
-    const { error: profileErr } = await supabase.from("profiles").insert({
-      id: data.user.id,
-      username: payload.username,
-      platform: payload.platform
-    });
-    if (profileErr) return { error: profileErr.message };
-  }
   revalidatePath("/");
   return { success: true };
 }
@@ -40,9 +43,12 @@ export async function loginAction(input: FormData) {
     email: input.get("email"),
     password: input.get("password")
   });
+
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword(payload);
+
   if (error) return { error: error.message };
+
   revalidatePath("/");
   return { success: true };
 }
@@ -53,19 +59,32 @@ export async function logoutAction() {
   revalidatePath("/");
 }
 
-export async function setProgressAction(camoId: string, status: "locked" | "in_progress" | "completed") {
+export async function setProgressAction(
+  camoId: string,
+  status: "locked" | "in_progress" | "completed"
+) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+
   if (!user) return { error: "Not authenticated" };
-  const { error } = await supabase.from("user_camo_progress").upsert({
-    user_id: user.id,
-    camo_id: camoId,
-    status,
-    updated_at: new Date().toISOString()
-  }, { onConflict: "user_id,camo_id" });
+
+  const { error } = await supabase.from("user_camo_progress").upsert(
+    {
+      user_id: user.id,
+      camo_id: camoId,
+      status,
+      updated_at: new Date().toISOString()
+    },
+    { onConflict: "user_id,camo_id" }
+  );
+
   if (error) return { error: error.message };
+
   revalidatePath("/dashboard");
   revalidatePath("/weapons");
   revalidatePath("/leaderboard");
+
   return { success: true };
 }
