@@ -18,7 +18,15 @@ export default async function LeaderboardPage({ searchParams }: { searchParams: 
     top = top.filter((r: any) => friendIds.has(r.user_id) || r.user_id === user.id);
   }
 
-  const { data: me } = user ? await supabase.rpc("get_user_rank", { p_user_id: user.id }).single() : { data: null };
+  const { data: meRaw } = user
+  ? await supabase.rpc("get_user_rank", { p_user_id: user.id }).single()
+  : { data: null };
+
+const me = meRaw as {
+  rank_position: number | string;
+  completed_count: number | string;
+  completion_pct: number | string;
+} | null;
 
   return (
     <div className="space-y-4">
