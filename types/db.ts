@@ -4,9 +4,7 @@ export type Weapon = {
   id: string;
   name: string;
   slug: string;
-  category_id: string;
-  level_unlock: string | null;
-  release_order: number;
-  created_at: string;
-  weapon_categories?: { id: string; name: string; slug: string };
+  categorySlug: string;
+  levelUnlock: string;
+  releaseOrder: number;
 };
