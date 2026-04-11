@@ -17,7 +17,7 @@ export default async function DashboardPage() {
         <div className="card">
           <h2 className="text-xl font-semibold">Recent Progress Activity</h2>
           <ul className="mt-3 space-y-2 text-sm">
-            {data.recent.map((r: any) => <li key={r.camo_id} className="rounded border border-cyan-500/20 p-2">{r.status} • {new Date(r.updated_at).toLocaleString()}</li>)}
+            {data.recent.map((r: any) => <li key={r.camo_id} className="rounded border border-accent/25 p-2">{r.status} • {new Date(r.updated_at).toLocaleString()}</li>)}
           </ul>
         </div>
         <div className="card">

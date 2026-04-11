@@ -24,7 +24,7 @@ export default async function LeaderboardPage({ searchParams }: { searchParams: 
       <form className="card flex flex-wrap gap-2"><select className="input max-w-xs" name="platform" defaultValue={platform || ""}><option value="">All platforms</option><option>PC</option><option>PlayStation</option><option>Xbox</option></select><select className="input max-w-xs" name="scope" defaultValue={scope}><option value="all">All players</option><option value="friends">Friends</option></select><button className="btn">Filter</button></form>
       <div className="card overflow-x-auto">
         <table className="w-full text-sm"><thead><tr className="text-left text-accent"><th>#</th><th>Player</th><th>Platform</th><th>Completed</th><th>%</th><th>Mastery</th><th>Updated</th></tr></thead>
-          <tbody>{top.map((r) => <tr key={r.user_id} className="border-t border-cyan-300/10"><td>{r.rank_position}</td><td>{r.username}</td><td>{r.platform}</td><td>{r.completed_count}</td><td>{r.completion_pct}%</td><td>{r.mastery_count}</td><td>{new Date(r.last_updated).toLocaleDateString()}</td></tr>)}</tbody>
+          <tbody>{top.map((r) => <tr key={r.user_id} className="border-t border-accent/20"><td>{r.rank_position}</td><td>{r.username}</td><td>{r.platform}</td><td>{r.completed_count}</td><td>{r.completion_pct}%</td><td>{r.mastery_count}</td><td>{new Date(r.last_updated).toLocaleDateString()}</td></tr>)}</tbody>
         </table>
       </div>
       {leaderboard.me && (
