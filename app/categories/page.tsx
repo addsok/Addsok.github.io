@@ -1,14 +1,11 @@
-import { createClient } from "@/lib/supabase/server";
+import { getCategoryProgressData } from "@/lib/queries";
 
 export default async function CategoriesPage() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  const { data } = await supabase.from("category_progress_summary").select("*").eq("user_id", user.id).order("category_name");
+  const data = await getCategoryProgressData();
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      {data?.map((c: any) => (
+      {data.map((c) => (
         <div key={c.category_id} className="card">
           <h2 className="text-xl font-semibold">{c.category_name}</h2>
           <p className="text-sm">{c.completed_count}/{c.total_count} completed</p>
