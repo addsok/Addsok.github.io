@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Activity, ChevronRight, Crosshair, ShieldCheck, Trophy } from "lucide-react";
+import { ChevronRight, Crosshair, ShieldCheck, Trophy } from "lucide-react";
 
 const stats = [
   { label: "Tracked Weapons", value: "50+", detail: "Across all BO7 categories" },
@@ -30,16 +30,15 @@ export default function HomePage() {
     <section className="space-y-6 sm:space-y-8">
       <div className="card overflow-hidden p-0">
         <div className="space-y-6 p-5 sm:p-7 lg:p-9">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-            <Activity className="h-3.5 w-3.5" />
-            Codhub • BO7 Tracker
+          <div className="inline-flex w-fit items-center rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+            BO7 Tracker
           </div>
 
           <div className="space-y-4">
-            <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">BO7 Tracker by Codhub</h1>
+            <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">Track your BO7 camo grind</h1>
             <p className="section-copy">
-              Codhub is your parent platform for progression tools. BO7 Tracker is the current premium mobile-style
-              companion for your camo grind, routes, and ranked completion pace.
+              A clean mobile companion for tracking weapon progress, camo unlocks, and completion across every
+              category.
             </p>
           </div>
 
