@@ -6,12 +6,19 @@ export async function getDashboardData() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const [{ data: progress }, { data: camos }, { data: weapons }, { data: rankRow }] = await Promise.all([
+  const [
+    { data: progress },
+    { data: camos },
+    { data: weapons },
+    { data: rankRowRaw }
+  ] = await Promise.all([
     supabase.from("user_camo_progress").select("status,camo_id,updated_at,camos(weapon_id,camo_groups(type))").eq("user_id", user.id),
     supabase.from("camos").select("id"),
     supabase.from("weapons").select("id,name"),
     supabase.rpc("get_user_rank", { p_user_id: user.id }).single()
   ]);
+
+  const rankRow = rankRowRaw as { rank_position: number | null } | null;
 
   const completed = progress?.filter((p) => p.status === "completed").length ?? 0;
   const total = camos?.length ?? 0;
