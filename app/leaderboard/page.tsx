@@ -28,7 +28,11 @@ export default async function LeaderboardPage({ searchParams }: { searchParams: 
           <tbody>{top?.map((r: any, i: number) => <tr key={r.user_id} className="border-t border-cyan-300/10"><td>{i+1}</td><td>{r.username}</td><td>{r.platform}</td><td>{r.completed_count}</td><td>{r.completion_pct}%</td><td>{r.mastery_count}</td><td>{new Date(r.last_updated).toLocaleDateString()}</td></tr>)}</tbody>
         </table>
       </div>
-      {me && <div className="card">Your rank: <b>#{me.rank_position}</b> • {me.completed_count} camos • {me.completion_pct}%</div>}
+      {me && (
+  <div className="card">
+    Your rank: <b>#{String(me.rank_position)}</b> • {String(me.completed_count)} camos • {String(me.completion_pct)}%
+  </div>
+)}
     </div>
   );
 }
