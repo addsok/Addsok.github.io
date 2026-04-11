@@ -32,25 +32,24 @@ export default function HomePage() {
         <div className="space-y-6 p-5 sm:p-7 lg:p-9">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
             <Activity className="h-3.5 w-3.5" />
-            BO7 Premium Hub
+            Codhub • BO7 Tracker
           </div>
 
           <div className="space-y-4">
-            <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">
-              A premium mobile-style dashboard for your BO7 camo grind.
-            </h1>
+            <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">BO7 Tracker by Codhub</h1>
             <p className="section-copy">
-              Keep your progress, weapon routes, and ranked completion in one polished dark companion app experience.
+              Codhub is your parent platform for progression tools. BO7 Tracker is the current premium mobile-style
+              companion for your camo grind, routes, and ranked completion pace.
             </p>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <Link href="/weapons" className="btn justify-between">
-              Open Tracker
+              Open BO7 Tracker
               <ChevronRight className="h-4 w-4" />
             </Link>
             <Link href="/signup" className="btn-secondary justify-between">
-              Create Profile
+              Join Codhub
               <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
