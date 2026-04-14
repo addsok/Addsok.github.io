@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { getWeaponsWithProgress } from "@/lib/queries";
+import { WeaponCard } from "@/components/weapons/weapon-card";
 
 type WeaponRow = {
   weapon_id: string;
@@ -10,11 +10,15 @@ type WeaponRow = {
   total_count: number;
   completion_pct: number;
   release_order: number;
+  preview_tiles: { id: string; name: string; groupType: "base" | "special" | "mastery" }[];
+  mastery_tile: { id: string; name: string; groupType: "mastery" } | null;
+  progress_map: Record<string, "locked" | "in_progress" | "completed">;
 };
 
 export default async function WeaponsPage({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const params = await searchParams;
-  const weapons = (await getWeaponsWithProgress(params)) as WeaponRow[];
+  const data = await getWeaponsWithProgress(params);
+  const weapons = data.rows as WeaponRow[];
 
   const newWeaponIds = new Set(
     [...weapons]
@@ -31,8 +35,8 @@ export default async function WeaponsPage({ searchParams }: { searchParams: Prom
   }, new Map());
 
   return (
-    <div className="space-y-5 sm:space-y-6">
-      <form className="card grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="space-y-4 sm:space-y-5">
+      <form className="card grid gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
         <input className="input" name="search" placeholder="Search weapon" defaultValue={params.search} />
         <input className="input" name="category" placeholder="Category slug" defaultValue={params.category} />
         <select className="input" name="status" defaultValue={params.status || ""}>
@@ -49,104 +53,23 @@ export default async function WeaponsPage({ searchParams }: { searchParams: Prom
         <button className="btn sm:col-span-2 lg:col-span-1">Apply</button>
       </form>
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         {[...groupedWeapons.entries()].map(([categoryName, categoryWeapons]) => (
-          <section key={categoryName} className="space-y-3">
+          <section key={categoryName} className="space-y-2.5">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-semibold uppercase tracking-[0.18em] text-accent/90">{categoryName}</h2>
               <p className="text-xs text-slate-400">{categoryWeapons.length} weapons</p>
             </div>
 
-            <div className="grid gap-4">
-              {categoryWeapons.map((weapon) => {
-                const miniTileCount = Math.min(6, Math.max(4, Math.ceil(weapon.total_count / 2)));
-                const completedMiniTiles = Math.round((weapon.completion_pct / 100) * miniTileCount);
-                const masteryComplete = weapon.completion_pct === 100;
-
-                return (
-                  <article
-                    key={weapon.weapon_id}
-                    className="rounded-3xl border border-white/10 bg-panel/95 p-4 shadow-glow sm:p-5"
-                  >
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <div className="mb-2 flex flex-wrap items-center gap-2">
-                            <span className="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">
-                              {weapon.category_name}
-                            </span>
-                            {newWeaponIds.has(weapon.weapon_id) && (
-                              <span className="rounded-full border border-warning/40 bg-warning/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-warning">
-                                New
-                              </span>
-                            )}
-                          </div>
-                          <h3 className="text-xl font-semibold leading-tight">{weapon.weapon_name}</h3>
-                          <p className="mt-1 text-xs text-slate-400">
-                            {weapon.completed_count}/{weapon.total_count} camos completed
-                          </p>
-                        </div>
-
-                        <button
-                          type="button"
-                          aria-label={`Favourite ${weapon.weapon_name}`}
-                          className="rounded-full border border-white/15 bg-white/5 p-2 text-sm text-warning transition hover:border-warning/50 hover:bg-warning/10"
-                        >
-                          ★
-                        </button>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-[#14110d] p-4">
-                        <div className="mb-2 flex items-center justify-between text-xs">
-                          <span className="text-slate-400">Progress</span>
-                          <span className="font-semibold text-accent">{weapon.completion_pct}%</span>
-                        </div>
-                        <div className="h-2 rounded-full bg-slate-800">
-                          <div
-                            className="h-2 rounded-full bg-gradient-to-r from-accentMuted via-accent to-warning"
-                            style={{ width: `${weapon.completion_pct}%` }}
-                          />
-                        </div>
-
-                        <div className="mt-4 grid grid-cols-[1.2fr_auto] gap-3">
-                          <div className="flex min-h-20 items-end rounded-2xl border border-white/10 bg-gradient-to-br from-[#2b2217] to-[#18120d] p-3">
-                            <span className="text-lg font-semibold text-white/90">{weapon.weapon_name.slice(0, 2).toUpperCase()}</span>
-                          </div>
-
-                          <Link
-                            href={`/weapons/${weapon.weapon_id}`}
-                            className="inline-flex items-center justify-center rounded-2xl border border-accent/40 bg-accent/10 px-4 text-xs font-semibold uppercase tracking-[0.16em] text-accent transition hover:bg-accent/20"
-                          >
-                            Details
-                          </Link>
-                        </div>
-
-                        <div className="mt-4 flex items-center gap-2 overflow-x-auto pb-1">
-                          {Array.from({ length: miniTileCount }).map((_, index) => (
-                            <span
-                              key={`${weapon.weapon_id}-tile-${index}`}
-                              className={`h-7 w-7 shrink-0 rounded-lg border ${
-                                index < completedMiniTiles
-                                  ? "border-accent/50 bg-accent/25"
-                                  : "border-white/10 bg-white/5"
-                              }`}
-                            />
-                          ))}
-                          <span
-                            className={`ml-1 flex h-10 w-12 shrink-0 items-center justify-center rounded-xl border text-[10px] font-semibold uppercase tracking-[0.12em] ${
-                              masteryComplete
-                                ? "border-success/50 bg-success/20 text-success"
-                                : "border-white/20 bg-white/10 text-slate-300"
-                            }`}
-                          >
-                            Mastery
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
+            <div className="grid gap-3">
+              {categoryWeapons.map((weapon) => (
+                <WeaponCard
+                  key={weapon.weapon_id}
+                  weapon={weapon}
+                  isNew={newWeaponIds.has(weapon.weapon_id)}
+                  isLoggedIn={data.isLoggedIn}
+                />
+              ))}
             </div>
           </section>
         ))}
