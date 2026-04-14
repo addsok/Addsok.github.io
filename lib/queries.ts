@@ -100,6 +100,7 @@ export async function getWeaponsWithProgress(filters: {
       weapon_name: weapon.name,
       category_name: category?.name ?? weapon.categorySlug,
       category_slug: weapon.categorySlug,
+      level_unlock: weapon.levelUnlock,
       completed_count: completedCount,
       total_count: totalCount,
       completion_pct: completionPct,
@@ -108,9 +109,14 @@ export async function getWeaponsWithProgress(filters: {
       mastery_tile: masteryTile
         ? { id: masteryTile.id, name: masteryTile.name, groupType: masteryTile.groupType }
         : null,
-      progress_map: Object.fromEntries(
-        [...previewTiles, ...(masteryTile ? [masteryTile] : [])].map((tile) => [tile.id, progressMap.get(tile.id) ?? "locked"])
-      )
+      camo_list: weaponCamos.map((camo) => ({
+        id: camo.id,
+        name: camo.name,
+        groupType: camo.groupType,
+        requirement: camo.requirement,
+        unlock_order: camo.unlockOrder
+      })),
+      progress_map: Object.fromEntries(weaponCamos.map((tile) => [tile.id, progressMap.get(tile.id) ?? "locked"]))
     };
   });
 
