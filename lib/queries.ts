@@ -73,10 +73,16 @@ export async function getWeaponsWithProgress(filters: {
     ? await supabase.from("user_camo_progress").select("camo_id,status").eq("user_id", user.id)
     : { data: [] };
 
-  const completedCamoIds = new Set(
+  const progressMap = new Map(
     (progress ?? [])
-      .filter((row) => row.status === "completed" && camoById.has(row.camo_id))
-      .map((row) => row.camo_id)
+      .filter((row) => camoById.has(row.camo_id))
+      .map((row) => [row.camo_id, row.status as "locked" | "in_progress" | "completed"])
+  );
+
+  const completedCamoIds = new Set(
+    [...progressMap.entries()]
+      .filter(([, status]) => status === "completed")
+      .map(([camoId]) => camoId)
   );
 
   let rows = weapons.map((weapon) => {
@@ -86,6 +92,9 @@ export async function getWeaponsWithProgress(filters: {
     const completionPct = pct(completedCount, totalCount);
     const category = categoryBySlug.get(weapon.categorySlug);
 
+    const previewTiles = weaponCamos.filter((camo) => camo.groupType !== "mastery").slice(0, 8);
+    const masteryTile = [...weaponCamos].reverse().find((camo) => camo.groupType === "mastery") ?? null;
+
     return {
       weapon_id: weapon.id,
       weapon_name: weapon.name,
@@ -94,7 +103,14 @@ export async function getWeaponsWithProgress(filters: {
       completed_count: completedCount,
       total_count: totalCount,
       completion_pct: completionPct,
-      release_order: weapon.releaseOrder
+      release_order: weapon.releaseOrder,
+      preview_tiles: previewTiles.map((tile) => ({ id: tile.id, name: tile.name, groupType: tile.groupType })),
+      mastery_tile: masteryTile
+        ? { id: masteryTile.id, name: masteryTile.name, groupType: masteryTile.groupType }
+        : null,
+      progress_map: Object.fromEntries(
+        [...previewTiles, ...(masteryTile ? [masteryTile] : [])].map((tile) => [tile.id, progressMap.get(tile.id) ?? "locked"])
+      )
     };
   });
 
@@ -126,7 +142,7 @@ export async function getWeaponsWithProgress(filters: {
     rows.sort((a, b) => a.weapon_name.localeCompare(b.weapon_name));
   }
 
-  return rows;
+  return { rows, isLoggedIn: !!user };
 }
 
 export async function getWeaponDetailData(weaponId: string) {
@@ -169,10 +185,16 @@ export async function getCategoryProgressData() {
     ? await supabase.from("user_camo_progress").select("camo_id,status").eq("user_id", user.id)
     : { data: [] };
 
-  const completedCamoIds = new Set(
+  const progressMap = new Map(
     (progress ?? [])
-      .filter((row) => row.status === "completed" && camoById.has(row.camo_id))
-      .map((row) => row.camo_id)
+      .filter((row) => camoById.has(row.camo_id))
+      .map((row) => [row.camo_id, row.status as "locked" | "in_progress" | "completed"])
+  );
+
+  const completedCamoIds = new Set(
+    [...progressMap.entries()]
+      .filter(([, status]) => status === "completed")
+      .map(([camoId]) => camoId)
   );
 
   return weaponCategories.map((category) => {
