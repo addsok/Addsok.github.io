@@ -23,6 +23,20 @@ type WeaponRow = {
   progress_map: Record<string, "locked" | "in_progress" | "completed">;
 };
 
+const orderedCategories = [
+  { slug: "assault-rifles", name: "Assault Rifles" },
+  { slug: "smgs", name: "SMGs" },
+  { slug: "shotguns", name: "Shotguns" },
+  { slug: "lmgs", name: "LMGs" },
+  { slug: "marksman-rifles", name: "Marksman Rifles" },
+  { slug: "sniper-rifles", name: "Sniper Rifles" },
+  { slug: "pistols", name: "Pistols" },
+  { slug: "launchers", name: "Launchers" },
+  { slug: "melee", name: "Melee" }
+] as const;
+
+const orderedCategorySlugs = new Set<string>(orderedCategories.map((category) => category.slug));
+
 export default async function WeaponsPage({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const params = await searchParams;
   const data = await getWeaponsWithProgress(params);
@@ -36,41 +50,58 @@ export default async function WeaponsPage({ searchParams }: { searchParams: Prom
   );
 
   const groupedWeapons = weapons.reduce<Map<string, WeaponRow[]>>((acc, weapon) => {
-    const existing = acc.get(weapon.category_name) ?? [];
+    const existing = acc.get(weapon.category_slug) ?? [];
     existing.push(weapon);
-    acc.set(weapon.category_name, existing);
+    acc.set(weapon.category_slug, existing);
     return acc;
   }, new Map());
 
+  const visibleCategories = orderedCategories
+    .map((category) => ({ ...category, weapons: groupedWeapons.get(category.slug) ?? [] }))
+    .filter((category) => category.weapons.length > 0);
+
+  const uncategorizedCount = weapons.filter((weapon) => !orderedCategorySlugs.has(weapon.category_slug)).length;
+
   return (
-    <div className="space-y-4 sm:space-y-5">
-      <form className="card grid gap-2 p-3 sm:grid-cols-2 lg:grid-cols-4 sm:p-4">
-        <input className="input py-2.5" name="search" placeholder="Search weapon" defaultValue={params.search} />
-        <input className="input py-2.5" name="category" placeholder="Category slug" defaultValue={params.category} />
-        <select className="input py-2.5" name="status" defaultValue={params.status || ""}>
+    <div className="space-y-3 sm:space-y-4">
+      <form className="card grid grid-cols-2 gap-2 p-2.5 sm:grid-cols-4 sm:p-3">
+        <input className="input col-span-2 py-2" name="search" placeholder="Search weapon" defaultValue={params.search} />
+        <select className="input py-2" name="category" defaultValue={params.category || ""}>
+          <option value="">All categories</option>
+          {orderedCategories.map((category) => (
+            <option key={category.slug} value={category.slug}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+        <select className="input py-2" name="status" defaultValue={params.status || ""}>
           <option value="">Any status</option>
           <option value="completed">Completed</option>
           <option value="in_progress">In Progress</option>
         </select>
-        <select className="input py-2.5" name="sort" defaultValue={params.sort || "az"}>
+        <select className="input py-2" name="sort" defaultValue={params.sort || "az"}>
           <option value="az">A-Z</option>
           <option value="most_completed">Most Completed</option>
           <option value="least_completed">Least Completed</option>
           <option value="newest">Newest Weapon</option>
         </select>
-        <button className="btn py-2.5 sm:col-span-2 lg:col-span-4">Apply Filters</button>
+        <button className="btn py-2 sm:col-span-4">Apply Filters</button>
       </form>
 
-      <div className="space-y-5">
-        {[...groupedWeapons.entries()].map(([categoryName, categoryWeapons]) => (
-          <section key={categoryName} className="space-y-2.5">
+      {!!uncategorizedCount && (
+        <p className="text-xs text-slate-500">{uncategorizedCount} weapon(s) are hidden due to category mapping.</p>
+      )}
+
+      <div className="space-y-4">
+        {visibleCategories.map((category) => (
+          <section key={category.slug} className="space-y-2">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-semibold uppercase tracking-[0.18em] text-accent/90">{categoryName}</h2>
-              <p className="text-xs text-slate-400">{categoryWeapons.length} weapons</p>
+              <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-accent/95">{category.name}</h2>
+              <p className="text-[11px] text-slate-400">{category.weapons.length}</p>
             </div>
 
-            <div className="grid gap-3">
-              {categoryWeapons.map((weapon) => (
+            <div className="grid gap-2.5">
+              {category.weapons.map((weapon) => (
                 <WeaponCard
                   key={weapon.weapon_id}
                   weapon={weapon}
