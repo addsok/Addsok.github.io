@@ -10,6 +10,7 @@ type Tile = {
   id: string;
   name: string;
   groupType: "base" | "special" | "mastery";
+  imagePath?: string;
 };
 
 type CamoDetail = Tile & {
@@ -53,15 +54,17 @@ const silhouettePathByCategory: Record<string, string> = {
   melee: "M16 4l2 2-8 8-2-2zM8 14l6 6 2-2-6-6z"
 };
 
-const camoImageByName: Record<string, string> = {};
-
 function resolveCamoBackground(tile: Tile) {
-  const key = tile.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  const src = camoImageByName[key];
+  const src = tile.imagePath;
 
   if (src) {
+    const hash = [...tile.name].reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+    const hue = hash % 360;
     return {
-      backgroundImage: `linear-gradient(180deg, rgba(15,15,20,0.08), rgba(8,8,12,0.65)), url(${src})`,
+      backgroundImage: `
+        linear-gradient(140deg, hsla(${hue}, 45%, 40%, 0.72), hsla(${(hue + 30) % 360}, 35%, 15%, 0.92)),
+        url(${src})
+      `,
       backgroundSize: "cover, cover",
       backgroundPosition: "center, center"
     };

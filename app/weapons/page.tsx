@@ -11,12 +11,13 @@ type WeaponRow = {
   total_count: number;
   completion_pct: number;
   release_order: number;
-  preview_tiles: { id: string; name: string; groupType: "base" | "special" | "mastery" }[];
-  mastery_tile: { id: string; name: string; groupType: "mastery" } | null;
+  preview_tiles: { id: string; name: string; groupType: "base" | "special" | "mastery"; imagePath?: string }[];
+  mastery_tile: { id: string; name: string; groupType: "mastery"; imagePath?: string } | null;
   camo_list: {
     id: string;
     name: string;
     groupType: "base" | "special" | "mastery";
+    imagePath?: string;
     requirement: string;
     unlock_order: number;
   }[];
