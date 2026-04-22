@@ -105,14 +105,15 @@ export async function getWeaponsWithProgress(filters: {
       total_count: totalCount,
       completion_pct: completionPct,
       release_order: weapon.releaseOrder,
-      preview_tiles: previewTiles.map((tile) => ({ id: tile.id, name: tile.name, groupType: tile.groupType })),
+      preview_tiles: previewTiles.map((tile) => ({ id: tile.id, name: tile.name, groupType: tile.groupType, imagePath: tile.imagePath })),
       mastery_tile: masteryTile
-        ? { id: masteryTile.id, name: masteryTile.name, groupType: masteryTile.groupType }
+        ? { id: masteryTile.id, name: masteryTile.name, groupType: masteryTile.groupType, imagePath: masteryTile.imagePath }
         : null,
       camo_list: weaponCamos.map((camo) => ({
         id: camo.id,
         name: camo.name,
         groupType: camo.groupType,
+        imagePath: camo.imagePath,
         requirement: camo.requirement,
         unlock_order: camo.unlockOrder
       })),
