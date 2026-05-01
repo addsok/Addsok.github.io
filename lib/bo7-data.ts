@@ -106,7 +106,7 @@ const multiplayerCamoTemplate: Omit<Camo, "id" | "weaponId">[] = [
   { name: "SINGULARITY", group: "Mastery", groupType: "mastery", requirement: "Official Multiplayer Mastery challenge (weapon/class-wide in BO7 guide)", unlockOrder: 16 }
 ];
 
-const sharedCamoImageBySlug: Record<string, string> = {
+const camoImageBySlug: Record<string, string> = {
   underbrush: "/camos/shared/underbrush.webp",
   woodland: "/camos/shared/woodland.webp",
   "slate-digital": "/camos/shared/slate-digital.webp",
@@ -122,6 +122,22 @@ const sharedCamoImageBySlug: Record<string, string> = {
   singularity: "/camos/mastery/singularity.webp"
 };
 
+
+
+const fallbackImageByGroupType: Record<CamoGroupType, string> = {
+  base: "/camos/shared/underbrush.webp",
+  special: "/camos/shared/woodland.webp",
+  mastery: "/camos/mastery/shattered-gold.webp"
+};
+
+const resolveCamoImagePath = (template: Omit<Camo, "id" | "weaponId">): string => {
+  const slug = toCamoIdPart(template.name);
+  const mappedPath = camoImageBySlug[slug];
+
+  if (mappedPath) return mappedPath;
+
+  return fallbackImageByGroupType[template.groupType];
+};
 const toCamoIdPart = (input: string) =>
   input
     .toLowerCase()
@@ -134,7 +150,7 @@ export const camos: Camo[] = weapons.flatMap((weapon) =>
   multiplayerCamoTemplate.map((template) => ({
     id: `${weapon.id}-${toCamoIdPart(template.name)}`,
     weaponId: weapon.id,
-    imagePath: sharedCamoImageBySlug[toCamoIdPart(template.name)],
+    imagePath: resolveCamoImagePath(template),
     ...template
   }))
 );
