@@ -45,7 +45,7 @@ const rawWeapons: Array<Omit<MW4Weapon, "id">> = [
 ];
 
 export const weapons: MW4Weapon[] = rawWeapons.map((weapon) => ({
-  id: \`mw4-\${weapon.slug}\`,
+  id: `mw4-${weapon.slug}`,
   ...weapon
 }));
 
