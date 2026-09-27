@@ -30,11 +30,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 </div>
               </Link>
 
-              <div className="hidden items-center gap-2 sm:flex">
-                <span className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-                  Live Tracker
-                </span>
-                <Link href={user ? "/profile" : "/login"} className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-300 hover:border-accent/40 hover:text-accent">
+              <div className="hidden items-center gap-1 sm:flex">
+                <Link href="/" className="rounded-lg px-3 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-slate-400 hover:bg-white/[0.035] hover:text-accent">Home</Link>
+                <Link href="/weapons" className="rounded-lg px-3 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-slate-400 hover:bg-white/[0.035] hover:text-accent">Arsenal</Link>
+                <Link href="/leaderboard" className="rounded-lg px-3 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-slate-400 hover:bg-white/[0.035] hover:text-accent">Ranks</Link>
+                <span className="ml-1 rounded-md border border-accent/20 bg-accent/5 px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-accent">MW4</span>
+                <Link href={user ? "/profile" : "/login"} className="ml-1 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-300 hover:border-accent/40 hover:text-accent">
                   {user ? "Profile" : "Sign In"}
                 </Link>
               </div>
