@@ -133,7 +133,7 @@ export default async function WeaponsPage({ searchParams }: { searchParams: Prom
               <p className="text-[11px] text-slate-400">{category.weapons.length}</p>
             </div>
 
-            <div className="grid gap-2.5">
+            <div className="grid gap-3 md:grid-cols-2">
               {category.weapons.map((weapon) => (
                 <WeaponCard
                   key={weapon.weapon_id}
