@@ -2,41 +2,75 @@ import Link from "next/link";
 import { ChevronRight, Crosshair, ShieldCheck, Trophy } from "lucide-react";
 
 const stats = [
-  { label: "Beta Weapons", value: "22", detail: "Across all 9 MW4 weapon classes" },
-  { label: "Universal Camos", value: "2", detail: "Officially confirmed for launch" },
-  { label: "Launch Arsenal", value: "33", detail: "Officially stated total at launch" }
+  { label: "Beta Weapons", value: "22", detail: "Across 9 weapon classes" },
+  { label: "Universal Camos", value: "2", detail: "Confirmed for launch" },
+  { label: "Launch Arsenal", value: "33", detail: "Official launch total" }
 ];
 
 const features = [
-  { title: "MW4 Weapon Tracker", copy: "Browse the verified beta weapon roster and keep your progress organised while the full launch data is added.", icon: Crosshair },
-  { title: "Universal Camos", copy: "Track the confirmed Moonlit Pearl and Gilded Ruin universal camos without inventing unconfirmed challenge data.", icon: ShieldCheck },
-  { title: "Your Progress", copy: "Your existing Codhub account and progress system stay in place while MW4 becomes the active tracker.", icon: Trophy }
+  { title: "Arsenal", copy: "Browse every verified MW4 beta weapon and keep your camo progress in one place.", icon: Crosshair },
+  { title: "Universal Camos", copy: "Track confirmed universal camos without filling the tracker with unverified challenge data.", icon: ShieldCheck },
+  { title: "Your Progress", copy: "Sign in to save completed camos and keep your grind organised across Codhub.", icon: Trophy }
 ];
 
 export default function HomePage() {
   return (
-    <section className="space-y-6 sm:space-y-8">
-      <div className="card overflow-hidden p-0">
-        <div className="space-y-6 p-5 sm:p-7 lg:p-9">
-          <div className="inline-flex w-fit items-center rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-            MW4 Tracker
+    <section className="space-y-5 sm:space-y-7">
+      <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0b100e] shadow-[0_24px_70px_rgba(0,0,0,0.65)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(168,185,107,0.14),transparent_30%),linear-gradient(115deg,rgba(255,255,255,0.025),transparent_48%)]" />
+        <div className="absolute right-0 top-0 h-full w-1/2 opacity-20 bg-[repeating-linear-gradient(135deg,transparent_0,transparent_18px,rgba(168,185,107,0.22)_19px,transparent_20px)]" />
+        <div className="relative grid gap-8 p-5 sm:p-8 lg:grid-cols-[1.35fr_0.65fr] lg:p-10">
+          <div className="flex flex-col justify-center">
+            <p className="mw4-label">Codhub // Modern Warfare 4</p>
+            <h1 className="mt-3 max-w-3xl text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl">
+              Track. Unlock. <span className="text-accent">Complete.</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400 sm:text-base">
+              The MW4 camo tracker for your weapon grind. The verified beta arsenal is loaded now, with official launch data added as it is confirmed.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2.5">
+              <Link href="/weapons" className="btn">Open Arsenal <ChevronRight className="ml-2 h-4 w-4" /></Link>
+              <Link href="/signup" className="btn-secondary">Create Account</Link>
+            </div>
           </div>
-          <div className="space-y-4">
-            <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">Track your Modern Warfare 4 camo grind</h1>
-            <p className="section-copy">Codhub is now set up around MW4, with the beta weapon roster verified and confirmed universal camos ready to track.</p>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/weapons" className="btn justify-between">Open MW4 Tracker <ChevronRight className="h-4 w-4" /></Link>
-            <Link href="/signup" className="btn-secondary justify-between">Join Codhub <ChevronRight className="h-4 w-4" /></Link>
-          </div>
-          <div className="grid gap-3 rounded-2xl border border-white/10 bg-[#14110d] p-3 sm:grid-cols-3">
-            {stats.map((stat) => <div key={stat.label} className="rounded-2xl border border-white/10 bg-black/20 p-4"><p className="text-[11px] uppercase tracking-[0.16em] text-slate-500">{stat.label}</p><p className="mt-2 text-2xl font-semibold text-white">{stat.value}</p><p className="mt-1 text-xs text-slate-400">{stat.detail}</p></div>)}
+
+          <div className="grid gap-2 self-end sm:grid-cols-3 lg:grid-cols-1">
+            {stats.map((stat) => (
+              <div key={stat.label} className="rounded-xl border border-white/10 bg-black/25 p-4 backdrop-blur-sm">
+                <p className="mw4-label">{stat.label}</p>
+                <p className="mt-2 text-3xl font-black text-white">{stat.value}</p>
+                <p className="mt-1 text-xs text-slate-500">{stat.detail}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-      <section className="card section-shell">
-        <div><h2 className="section-heading">MW4 data status</h2><p className="section-copy">The 22-weapon beta roster is verified from Call of Duty&apos;s official MW4 beta guide. Weapon-specific launch camo challenges have not been added until officially confirmed.</p></div>
-        <div className="grid gap-3">{features.map(({ title, copy, icon: Icon }) => <article key={title} className="rounded-2xl border border-white/10 bg-[#14110d] p-4 sm:p-5"><div className="flex items-start gap-4"><div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent/35 bg-accent/15 text-accent"><Icon className="h-5 w-5" /></div><div className="space-y-1.5"><h3 className="text-base font-semibold text-white sm:text-lg">{title}</h3><p className="text-sm leading-6 text-slate-400">{copy}</p></div></div></article>)}</div>
+      </section>
+
+      <section className="grid gap-3 md:grid-cols-3">
+        {features.map(({ title, copy, icon: Icon }) => (
+          <article key={title} className="mw4-panel rounded-2xl p-5">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-accent/30 bg-accent/10 text-accent">
+              <Icon className="h-5 w-5" />
+            </div>
+            <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.18em] text-accent">{title}</p>
+            <p className="mt-2 text-sm leading-6 text-slate-400">{copy}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="card">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="mw4-label">Data status</p>
+            <h2 className="mt-1 section-heading">MW4 beta arsenal loaded</h2>
+          </div>
+          <span className="rounded-md border border-accent/25 bg-accent/5 px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-accent">
+            Launch data pending
+          </span>
+        </div>
+        <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-400">
+          The 22-weapon beta roster is loaded. Weapon-specific launch camo challenges are kept out of the tracker until the official challenge data is confirmed.
+        </p>
       </section>
     </section>
   );
