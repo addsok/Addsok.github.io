@@ -18,20 +18,29 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body>
         <div className="app-shell">
-          <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0d0b08]/90 backdrop-blur-2xl">
-            <div className="mx-auto flex w-full max-w-xl items-center justify-between gap-3 px-4 py-4 sm:max-w-5xl sm:px-6">
-              <Link href="/" className="inline-flex items-center gap-3 rounded-2xl border border-white/15 bg-[#1e1914] px-3.5 py-2.5 shadow-[0_8px_24px_rgba(0,0,0,0.3)]">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-[#2a231b] p-1.5">
-                  <Image src="/codhub-logo.png" alt="Codhub logo" width={38} height={38} className="h-9 w-9 object-contain" priority />
+          <header className="sticky top-0 z-40 border-b border-white/10 bg-[#070b0a]/90 backdrop-blur-2xl">
+            <div className="mx-auto flex w-full max-w-xl items-center justify-between gap-3 px-4 py-3 sm:max-w-6xl sm:px-6">
+              <Link href="/" className="group inline-flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-accent/35 bg-[#111712] p-1.5 shadow-[0_0_24px_rgba(168,185,107,0.08)]">
+                  <Image src="/codhub-logo.png" alt="Codhub logo" width={38} height={38} className="h-8 w-8 object-contain" priority />
                 </div>
                 <div className="leading-tight">
-                  <p className="text-base font-semibold text-white">Codhub</p>
-                  <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">MW4 Tracker</p>
+                  <p className="text-base font-black uppercase tracking-[0.08em] text-white">Codhub</p>
+                  <p className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.24em] text-accent">MW4 Camo Tracker</p>
                 </div>
               </Link>
+
+              <div className="hidden items-center gap-2 sm:flex">
+                <span className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                  Live Tracker
+                </span>
+                <Link href={user ? "/profile" : "/login"} className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-300 hover:border-accent/40 hover:text-accent">
+                  {user ? "Profile" : "Sign In"}
+                </Link>
+              </div>
             </div>
           </header>
-          <main className="mx-auto min-h-screen w-full max-w-xl px-4 pb-28 pt-6 sm:max-w-5xl sm:px-6 sm:pb-32 sm:pt-8">{children}</main>
+          <main className="mx-auto min-h-screen w-full max-w-xl px-4 pb-28 pt-5 sm:max-w-6xl sm:px-6 sm:pb-32 sm:pt-7">{children}</main>
           <BottomNav isLoggedIn={Boolean(user)} />
         </div>
         <AppToaster />
