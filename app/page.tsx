@@ -35,7 +35,7 @@ export default function HomePage() {
         </div>
       </div>
       <section className="card section-shell">
-        <div><h2 className="section-heading">MW4 data status</h2><p className="section-copy">The 22-weapon beta roster is verified from Call of Duty's official MW4 beta guide. Weapon-specific launch camo challenges have not been added until officially confirmed.</p></div>
+        <div><h2 className="section-heading">MW4 data status</h2><p className="section-copy">The 22-weapon beta roster is verified from Call of Duty&apos;s official MW4 beta guide. Weapon-specific launch camo challenges have not been added until officially confirmed.</p></div>
         <div className="grid gap-3">{features.map(({ title, copy, icon: Icon }) => <article key={title} className="rounded-2xl border border-white/10 bg-[#14110d] p-4 sm:p-5"><div className="flex items-start gap-4"><div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent/35 bg-accent/15 text-accent"><Icon className="h-5 w-5" /></div><div className="space-y-1.5"><h3 className="text-base font-semibold text-white sm:text-lg">{title}</h3><p className="text-sm leading-6 text-slate-400">{copy}</p></div></div></article>)}</div>
       </section>
     </section>
