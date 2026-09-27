@@ -54,7 +54,7 @@ export async function getDashboardData(gameSlug = DEFAULT_GAME) {
     totalWeapons: game.weapons.length,
     universalCamos: game.universalCamos.map((camo) => ({
       ...camo,
-      status: (progress.find((row) => row.camo_id === camo.id)?.status ?? "locked") as ProgressRow["status"]
+      status: ((progress ?? []).find((row) => row.camo_id === camo.id)?.status ?? "locked") as ProgressRow["status"]
     }))
   };
 }
