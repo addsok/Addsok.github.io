@@ -42,6 +42,7 @@ export default async function WeaponsPage({ searchParams }: { searchParams: Prom
   const params = await searchParams;
   const data = await getWeaponsWithProgress(params);
   const weapons = data.rows as WeaponRow[];
+  const universalCamos = data.universalCamos;
 
   const newWeaponIds = new Set(
     [...weapons]
@@ -65,6 +66,37 @@ export default async function WeaponsPage({ searchParams }: { searchParams: Prom
 
   return (
     <div className="space-y-3 sm:space-y-4">
+      <section className="card border-accent/20 bg-accent/[0.04]">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">MW4 Beta Data</p>
+            <h1 className="mt-1 text-xl font-semibold text-white">22 verified beta weapons</h1>
+            <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-400">The beta roster is confirmed. Weapon-specific launch camo challenges are not displayed until official challenge data is available.</p>
+          </div>
+          <span className="rounded-full border border-white/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] text-slate-400">Launch data pending</span>
+        </div>
+      </section>
+
+      <section className="card">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">Universal Camos</h2>
+            <p className="mt-1 text-xs text-slate-400">Confirmed for MW4 at launch</p>
+          </div>
+          <span className="text-xs text-slate-500">{universalCamos.length} confirmed</span>
+        </div>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          {universalCamos.map((camo) => (
+            <div key={camo.id} className="rounded-xl border border-white/10 bg-black/20 p-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-semibold text-white">{camo.name}</span>
+                <span className="text-[10px] uppercase tracking-[0.1em] text-accent">{camo.status === "completed" ? "Completed" : "Locked"}</span>
+              </div>
+              <p className="mt-1 text-xs leading-5 text-slate-400">{camo.requirement}</p>
+            </div>
+          ))}
+        </div>
+      </section>
       <form className="card grid grid-cols-2 gap-2 p-2.5 sm:grid-cols-4 sm:p-3">
         <input className="input col-span-2 py-2" name="search" placeholder="Search weapon" defaultValue={params.search} />
         <select className="input py-2" name="category" defaultValue={params.category || ""}>
