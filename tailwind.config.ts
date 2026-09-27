@@ -5,17 +5,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "#090806",
-        panel: "#1b1612",
-        accent: "#d89f37",
-        accentMuted: "#4d3920",
-        success: "#58d68d",
-        warning: "#f5c96c",
-        danger: "#ff6f88"
+        bg: "#070b0a",
+        panel: "#101614",
+        accent: "#a8b96b",
+        accentMuted: "#536039",
+        success: "#a8b96b",
+        warning: "#d6b85c",
+        danger: "#e26d6d"
       },
       boxShadow: {
-        glow: "0 24px 65px rgba(0, 0, 0, 0.6)",
-        inset: "inset 0 1px 0 rgba(255, 255, 255, 0.04)"
+        glow: "0 24px 65px rgba(0, 0, 0, 0.68)",
+        inset: "inset 0 1px 0 rgba(255, 255, 255, 0.045)"
       }
     }
   },
